@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,9 +53,12 @@ public class CartController extends HttpServlet {
 			switch(action) {
 				case "/addcart":
 					 addToCart(request, response);
-           break;
-        default:
-           break;
+                     break;
+				case "/delete":
+					deleteFromCart(request,response);
+					break;
+				default:
+					break;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -90,6 +94,14 @@ public class CartController extends HttpServlet {
 	 // Add this item and quantity to the ShoppingCart
    shoppingCart.addCartItem(existingBook, quantity);
   }
+
+	private void deleteFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession session = request.getSession();
+		int index =-1;
+		if (!request.getParameter("index").equals(""))index = Integer.parseInt(request.getParameter("index"));
+        ShoppingCart cartItem =(ShoppingCart) session.getAttribute("cart");
+        cartItem.deleteCartItem(index);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

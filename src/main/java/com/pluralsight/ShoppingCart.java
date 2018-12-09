@@ -53,4 +53,9 @@ public class ShoppingCart {
   setOrderTotal(dblTotal);
  }
 
+
+ public void deleteCartItem(int index)throws ArrayIndexOutOfBoundsException{
+  cartItems.remove(index);
+ }
+
 }
