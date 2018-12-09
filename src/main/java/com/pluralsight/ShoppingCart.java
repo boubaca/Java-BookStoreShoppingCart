@@ -58,4 +58,8 @@ public class ShoppingCart {
   cartItems.remove(index);
  }
 
+ public void updateCartItem(int index, int quantity) throws ArrayIndexOutOfBoundsException{
+  cartItems.get(index).setQuantity(quantity);
+ }
+
 }
